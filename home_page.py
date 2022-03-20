@@ -3,16 +3,16 @@ import matplotlib.pyplot as plt,tkinter as tk,mysql.connector as sqltor,pandas a
 #Import tkinter modules
 from tkinter import font,ttk,messagebox
 #Import PIL modules
-from PIL import Image
+#from PIL import Image
 #Import datetime modules
-from datetime import date,timedelta,datetime
+#from datetime import date,timedelta,datetime
 #Import sqlalchemy
-from sqlalchemy import create_engine
+#from sqlalchemy import create_engine
 
 BG_COLOR = "#fc8803"
 FG_COLOR = "#03e3fc"
 WIDTH = 300
-EL_BG_COLOR = ["#eba434","#9beb34"]
+EL_BG_COLOR = ["#e06666","#6acf3e","#9beb34","#eba434"]
 theme = "light"
 if theme == "dark":
 	FG_COLOR,BG_COLOR = "white","gray15"
@@ -32,26 +32,29 @@ def all_children (window) :
 	return _lst
 
 def theme_change():
+	global theme,FG_COLOR,BG_COLOR,EL_BG_COLOR
 	i = 0
 	frame.configure(bg = 'gray15')
-	global theme,FG_COLOR,BG_COLOR
 	if theme == "light":
 		theme = "dark"
 	else:
 		theme = "light"
+	photo = tk.PhotoImage(file = "Logos/rEVolt_{}.png".format(theme))
+	title.configure(image = photo)
+	title.image = photo
 	if theme == "dark":
 		FG_COLOR,BG_COLOR = "white","gray15"
 	elif theme == 'light':
-		FG_COLOR,BG_COLOR, EL_BG_COLOR = "black","white",["#eba434","#9beb34"]
+		FG_COLOR,BG_COLOR = "black","white"
 	window.config(bg = BG_COLOR)
 	for el in all_children(window):
 		try:
-			el['bg'] = BG_COLOR
-			el['fg'] = FG_COLOR
+			if el['bg'] not in EL_BG_COLOR:
+				el['bg'] = BG_COLOR
+				el['fg'] = FG_COLOR
+			el['highlightbackground'] = FG_COLOR
 		except:
 			pass
-	label['bg'] = EL_BG_COLOR[0]
-	label_right['bg'] = EL_BG_COLOR[1]
 	menu(menubar)
 	pack_buttons()
 
@@ -72,7 +75,8 @@ def about():
 	if theme ==  "dark":
 		FGCOLOR = BDCOLOR = "DarkSlateGray4"
 	else:
-		FGCOLOR = BDCOLOR = "dark green"
+		FGCOLOR = "#6aa84f"
+		BDCOLOR = "#e06666"
 	win['bg'] = BG_COLOR
 	win.title("About")
 	frame = tk.Frame(win,bg = BG_COLOR,highlightbackground = BDCOLOR, highlightthickness = 5)
@@ -101,21 +105,29 @@ window.geometry("1920x1080")
 frame = tk.Frame(window)
 heading = tk.Frame(window,bg = BG_COLOR)
 bottomframe_left = tk.Frame(window,bg = BG_COLOR)
-label = tk.Label(bottomframe_left,text = 'Explore by category',padx = 10,bg = EL_BG_COLOR[0],fg = FG_COLOR,pady = 10)
+label = tk.Label(bottomframe_left,text = 'Explore by category',padx = 10,bg = EL_BG_COLOR[0],fg = FG_COLOR,pady = 10, highlightbackground = "black",highlightthickness = 1)
 tw_btn = tk.Button(bottomframe_left,text = "Two wheelers",command = None, padx = 80, pady = 40, activebackground = "grey", font = ("Ubuntu mono" , 20), fg = "gray15")
-fw_btn = tk.Button(bottomframe_left, text = "Four wheelers", command = None, padx = 280, pady = 40,activebackground = "grey", font = ("Ubuntu mono" , 20), fg = "gray15")
+fw_btn = tk.Button(bottomframe_left, text = "Four wheelers", command = None, padx = 320, pady = 40,activebackground = "grey", font = ("Ubuntu mono" , 20), fg = "gray15")
 
 bottomframe_right = tk.Frame(window)
-label_right = tk.Label(bottomframe_right,text = 'Search by brand',padx = 10,bg = EL_BG_COLOR[1],fg = FG_COLOR,pady = 10)
+label_right = tk.Label(bottomframe_right,text = 'Search by brand',padx = 10,bg = EL_BG_COLOR[1],fg = FG_COLOR,pady = 10, highlightbackground = "black",highlightthickness = 1)
 img_frame = tk.Frame(window,bg = BG_COLOR, highlightbackground= FG_COLOR, highlightthickness=5)
+#vsclbr = tk.Scrollbar(img_frame, orient = 'vertical')
+#vsclbr.pack(side = "right", fill = "y")
+blog = tk.Label(img_frame, text = "According to an independent study by CEEW Centre for Energy Finance (CEEW-CEF), \nthe EV market in India will be a US$206 billion opportunity by 2030 if India maintains steady progress to meet its ambitious 2030 target.\n This would require a cumulative investment of over US$180 billion in vehicle production and charging infrastructure. Another report by India Energy Storage Alliance (IESA)\n projects that the Indian EV market will grow at a CAGR of 36% till 2026. The EV battery market is also projected to grow at a CAGR of 30 percent during the same period.", padx = 10,bg = "white",fg = FG_COLOR,pady = 10, highlightbackground = "black",highlightthickness = 1, font = (None,10,'bold'))
+blog.pack(pady = 10)
 #img_label = tk.Label(img_frame,text = '',padx = 10,bg = BG_COLOR,fg = FG_COLOR,pady = 10)
 canvas = tk.Canvas(img_frame, bg = BG_COLOR,height = 120,width = 140)
-logo = tk.PhotoImage(file="Logos/rEVolt.png")
+logo = tk.PhotoImage(file="Logos/rEVolt_{}.png".format(theme))
 title = tk.Label(heading,image = logo)
 title.image = logo
+#logo = tk.PhotoImage(file="Logos/rvce_logo.png")
+#rvlogo = tk.Label(heading,image = logo)
+#rvlogo.image = logo
+#rvlogo.pack(anchor = tk.N,side = "left")
 #admin_login_button = tk.Button(heading,text = "Login",padx = 20,bg = BG_COLOR,fg = FG_COLOR )
 #Pack the heading
-heading.pack(fill = 'x')
+heading.pack()
 #Configure the labels
 #label.config(font=("None", 12,"bold"))
 #img_label.config(font=("None", 12,"bold")) 
@@ -126,7 +138,7 @@ heading.pack(fill = 'x')
 #Initialise refresh label,dt
 dt = tk.Label(window, text = "Compare and choose between EVs",bg = BG_COLOR,fg = FG_COLOR, font = ("Helvetica",20))
 #Pack the window title
-title.pack(side = 'top')
+title.pack(side = "top")
 #Pack the label dt
 dt.pack()
 '''#Initialise a tk frame
@@ -143,11 +155,14 @@ menubar.add_cascade(label ='Help', menu = help)
 def pack_buttons():
 	for widget in logo_frame.winfo_children():
 		widget.destroy()
+	i = 0
 	for img in img_list:
 		photo = tk.PhotoImage(file = "Logos/"+img+"_"+theme+".png")
-		btn =  tk.Button(logo_frame, command = None, image = photo, activebackground = "white")
+		btn =  tk.Button(logo_frame, command = None, image = photo, activebackground = "black")
 		btn.image = photo
-		btn.pack(side = "right",padx = 20, pady = 10)
+		btn.grid(row = i//5,column = i%5,padx = 40, pady = 30)
+		i += 1
+#New comment
 def menu(menubar):
 	#Initialise file menu in the menubar
 	menubar['bg'] = BG_COLOR
@@ -162,7 +177,7 @@ def menu(menubar):
 	#Add a seperator
 	file.add_separator(background = BG_COLOR) 
 	#Add exit option
-	file.add_command(label ='Exit',background = BG_COLOR,foreground = FG_COLOR)
+	file.add_command(label ='Exit',background = BG_COLOR,foreground = FG_COLOR, command = lambda : window.destroy())
 	help.add_command(label ='About         ', command=about, background = BG_COLOR,foreground = FG_COLOR) 
 	#Configure window to have menubar
 	window.config(menu = menubar)
@@ -175,7 +190,7 @@ img_frame.pack(side = "bottom",fill = "both", expand = True)
 bottomframe_left.pack(side = "left",anchor = tk.N,fill = "x",expand = True)
 #Pack bottomframe_right
 bottomframe_right.pack(side = "right",anchor = tk.N,fill = "x",expand = True)
-img_list = ["ather_logo","mg_logo","tata_logo", "hyundai_logo","hero_logo", "ola_logo"]
+img_list = ["ather_logo","mg_logo","tata_logo", "hyundai_logo","hero_logo", "ola_logo","tvs_logo"]
 logo_frame = tk.Frame(bottomframe_right, bg = BG_COLOR, borderwidth = 0)
 pack_buttons()
 #ather_btn.pack(side = "bottom",anchor = tk.S)
@@ -185,8 +200,8 @@ logo_frame.pack(side = "bottom", anchor = "c",fill = "both")
 #Pack the label
 label.pack(fill = 'x',anchor = tk.N)
 #Pack the buttons
-tw_btn.pack(side = 'bottom',fill = 'x',anchor = tk.S, padx = 20, pady = 20)
-fw_btn.pack(side = 'bottom',fill = 'x',anchor = tk.S, padx = 20, pady = 20)
+tw_btn.pack(side = 'bottom',fill = 'x',anchor = tk.S, padx = 40, pady = 20)
+fw_btn.pack(side = 'bottom',fill = 'x',anchor = tk.S, padx = 40, pady = 20)
 #Pack the label
 label_right.pack(side = 'top',fill = 'x',anchor = tk.E)
 
@@ -200,5 +215,6 @@ label_right.pack(side = 'top',fill = 'x',anchor = tk.E)
 #Pack the canvas
 #canvas.pack(side = "right",expand = True,fill = 'both',anchor = tk.NE)
 #Execution stops here
+window.bind("<Control-w>",lambda : window.destroy())
 window.mainloop()
 print('Exit')

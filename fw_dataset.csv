@@ -1,0 +1,29 @@
+Manufacturer,Model,Incentive,Battery Capacity (kWh),Mileage (km/kWh),Range (km),Price,Charging Time
+Tata Motors,Tigor EV XZ+,299800,30.2,9.43,312,754000,0 to 80% charge: 5 hours 45 minutes 
+Tata Motors,Tigor EV XE+,215000,21.5,8.47,213,595000,0 to 80% charge: 5 hours 45 minutes 
+Tata Motors,Tigor EV XM,279800,30.2,9.43,312,650000,0 to 80% charge: 5 hours 45 minutes 
+Tata Motors,Tigor EV XM+,215000,21.5,8.47,213,670000,0 to 80% charge: 5 hours 45 minutes 
+Tata Motors,Tigor EV XT+,215000,21.5,8.47,213,700000,0 to 80% charge: 5 hours 45 minutes 
+Tata Motors,Tigor EV XE,162000,16.2,7.52,140,550000,0 to 80% charge: 5 hours 45 minutes 
+Tata Motors,Tigor EV XM ,162000,16.2,7.52,140,620000,0 to 80% charge: 5 hours 45 minutes 
+Tata Motors,Tigor EV XT+,162000,16.2,7.52,140,1000000,0 to 80% charge: 5 hours 45 minutes 
+Tata Motors,Xpres T EV XE+,0,21.5,8.48,213,1020000,11.5h at 220V
+Tata Motors,Xpres T EV XT+,0,21.5,8.48,213,1050000,11.5h at 220V
+Tata Motors,Xpres T EV XM+,0,21.5,8.48,213,1100000,11.5h at 220V
+Tata Motors,Nexon EV XZ+ DK,0,30.2,7,312,1629000,20 to 100% in eight hours
+Tata Motors,Nexon EV XM,0,30.2,7,312,1454000,20 to 100% in eight hours
+Tata Motors,Nexon EV XZ+,0,30.2,7,312,1595000,20 to 100% in eight hours
+Tata Motors,Nexon XZ+ Lux,0,30.2,7,312,1700000,20 to 100% in eight hours
+,,,,,,,
+Mahindra Electric,e Verito D2,212000,21.2,6.85,181,912000,7 – 8 hours
+Mahindra Electric,e Verito C2,159000,15.9,6.71,143,920000,7 – 8 hours
+Mahindra Electric,e Verito C4,159000,15.9,6.71,143,925000,7 – 8 hours
+Mahindra Electric,e Supro Cargo van,161000,16.1,7.04,134,924000,7 – 8 hours
+Mahindra Electric,e Verito C6,159000,15.9,6.71,143,930000,7 – 8 hours
+Mahindra Electric,e Verito D6,0,21.2,6.85,181,935000,7 – 8 hours
+Mahindra Electric,e Verito D4,0,21.2,6.85,181,946000,7 – 8 hours
+Mahindra Electric,e Supro Cargo van VX,0,16.1,7.04,134,924000,7 – 8 hours
+,,,,,,,
+Hyundai Electric,Kona,0,39.2,11.53,452,2400000,10 – 17 hours
+,,,,,,,
+MG Motors,ZS EV,0,50.3,8.12,461,2500000,14 – 25 hours
